@@ -133,6 +133,9 @@ def receive_sms():
             contact_name=contact_name
         )
         
+        # Create notification for all users with Sales User role
+        create_sms_notification(log, from_number, message_body, contact_name, linked_doctype, linked_name)
+        
         # Return TwiML response (empty - no auto-reply)
         frappe.response["type"] = "text/xml"
         return '<?xml version="1.0" encoding="UTF-8"?><Response></Response>'
@@ -140,6 +143,58 @@ def receive_sms():
     except Exception as e:
         frappe.log_error(frappe.get_traceback(), "Twilio Webhook Error")
         return '<?xml version="1.0" encoding="UTF-8"?><Response></Response>'
+
+
+def create_sms_notification(log, from_number, message_body, contact_name, linked_doctype, linked_name):
+    """
+    Create a notification for incoming SMS.
+    Uses Frappe's built-in Notification Log system.
+    """
+    try:
+        # Determine the notification subject
+        sender = contact_name or from_number
+        subject = f"New SMS from {sender}"
+        
+        # Truncate message for notification
+        preview = message_body[:100] + "..." if len(message_body) > 100 else message_body
+        
+        # Get users to notify (System Manager and Sales User roles)
+        users_to_notify = frappe.get_all(
+            "Has Role",
+            filters={"role": ["in", ["System Manager", "Sales User"]], "parenttype": "User"},
+            fields=["parent"],
+            distinct=True
+        )
+        
+        for user_row in users_to_notify:
+            user = user_row.parent
+            
+            # Skip disabled users and Guest
+            if user in ["Guest", "Administrator"]:
+                continue
+            
+            user_doc = frappe.get_cached_doc("User", user)
+            if not user_doc.enabled:
+                continue
+            
+            # Create notification log
+            notification = frappe.get_doc({
+                "doctype": "Notification Log",
+                "for_user": user,
+                "type": "Alert",
+                "document_type": linked_doctype or "SMS Log",
+                "document_name": linked_name or log.name,
+                "subject": subject,
+                "email_content": f"<p><strong>{sender}:</strong> {preview}</p>",
+                "read": 0
+            })
+            notification.insert(ignore_permissions=True)
+        
+        frappe.db.commit()
+        
+    except Exception as e:
+        # Don't fail the webhook if notification fails
+        frappe.log_error(frappe.get_traceback(), "SMS Notification Error")
 
 
 def find_linked_record(phone_number):

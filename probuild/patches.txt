@@ -9,3 +9,4 @@ probuild.patches.v0_0.seed_capacity_profiles
 probuild.patches.v0_0.update_capacity_profiles_real_hours
 probuild.patches.v0_0.probuild_reference_fields
 probuild.patches.v0_0.hide_lead_ui
+probuild.patches.v0_0.add_sms_inbox_shortcut
