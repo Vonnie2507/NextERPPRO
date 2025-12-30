@@ -1,0 +1,45 @@
+[
+    {
+        "doctype": "SMS Template",
+        "template_name": "Quote Sent",
+        "enabled": 1,
+        "applicable_for": "Opportunity",
+        "message_template": "Hi {customer_name}, your quote for {job_nickname} is ready. Please check your email or give us a call. - {company_name}"
+    },
+    {
+        "doctype": "SMS Template",
+        "template_name": "Job Confirmed",
+        "enabled": 1,
+        "applicable_for": "Opportunity",
+        "message_template": "Hi {customer_name}, great news! Your job {job_nickname} has been confirmed. We'll be in touch with next steps. - {company_name}"
+    },
+    {
+        "doctype": "SMS Template",
+        "template_name": "On Our Way",
+        "enabled": 1,
+        "applicable_for": "Opportunity",
+        "message_template": "Hi {customer_name}, our team is on their way for {job_nickname}. See you soon! - {company_name}"
+    },
+    {
+        "doctype": "SMS Template",
+        "template_name": "Job Complete",
+        "enabled": 1,
+        "applicable_for": "Opportunity",
+        "message_template": "Hi {customer_name}, your job {job_nickname} is now complete. Thanks for choosing {company_name}!"
+    },
+    {
+        "doctype": "SMS Template",
+        "template_name": "Follow Up",
+        "enabled": 1,
+        "applicable_for": "Both",
+        "message_template": "Hi {customer_name}, just following up on your enquiry. Let us know if you have any questions. - {company_name}"
+    },
+    {
+        "doctype": "SMS Template",
+        "template_name": "Invoice Sent",
+        "enabled": 1,
+        "applicable_for": "Opportunity",
+        "message_template": "Hi {customer_name}, your invoice for {job_nickname} has been sent. Please check your email for details. - {company_name}"
+    }
+]
+

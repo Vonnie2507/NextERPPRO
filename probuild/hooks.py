@@ -30,7 +30,7 @@ app_license = "mit"
 
 # Include JS in specific doctype views
 doctype_js = {
-    "Opportunity": "public/js/opportunity_address.js",
+    "Opportunity": "public/js/opportunity_probuild.js",
     "Prospect": "public/js/prospect_probuild.js"
 }
 

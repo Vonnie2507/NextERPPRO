@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "autoname": "field:template_name",
+ "creation": "2024-12-30 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "template_name",
+  "enabled",
+  "column_break_1",
+  "applicable_for",
+  "section_message",
+  "message_template",
+  "help_text"
+ ],
+ "fields": [
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "label": "Template Name",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "applicable_for",
+   "fieldtype": "Select",
+   "label": "Applicable For",
+   "options": "\nProspect\nOpportunity\nBoth",
+   "default": "Both",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_message",
+   "fieldtype": "Section Break",
+   "label": "Message Template"
+  },
+  {
+   "fieldname": "message_template",
+   "fieldtype": "Text",
+   "label": "Message Template",
+   "reqd": 1,
+   "description": "Use placeholders: {customer_name}, {job_nickname}, {opportunity_name}, {company_name}"
+  },
+  {
+   "fieldname": "help_text",
+   "fieldtype": "HTML",
+   "label": "Help",
+   "options": "<div class=\"alert alert-info\"><strong>Available Placeholders:</strong><br><code>{customer_name}</code> - Customer/Prospect name<br><code>{job_nickname}</code> - Job nickname from Opportunity<br><code>{opportunity_name}</code> - Opportunity ID<br><code>{company_name}</code> - Your company name</div>"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2024-12-30 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Probuild",
+ "name": "SMS Template",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Sales User"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
+}
+
