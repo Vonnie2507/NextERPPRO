@@ -1,0 +1,11 @@
+[pre_model_sync]
+# Patches added in this section will be executed before doctypes are migrated
+# Read docs to understand patches: https://frappeframework.com/docs/v14/user/en/database-migrations
+
+[post_model_sync]
+# Patches added in this section will be executed after doctypes are migrated
+probuild.patches.v0_0.task_capacity_fields
+probuild.patches.v0_0.seed_capacity_profiles
+probuild.patches.v0_0.update_capacity_profiles_real_hours
+probuild.patches.v0_0.probuild_reference_fields
+probuild.patches.v0_0.hide_lead_ui

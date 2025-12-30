@@ -1,0 +1,100 @@
+<div class="container" style="max-width: 1400px; padding-top: 18px;">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 style="display:flex; align-items:center; justify-content:space-between;">
+        <span>Production Board</span>
+        <small id="updated" style="opacity: 0.7;"></small>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 16px;">
+    <div class="col-sm-6">
+      <h4>Due Today (Tasks)</h4>
+      <div id="due_today_tasks"></div>
+    </div>
+    <div class="col-sm-6">
+      <h4>Behind (Tasks)</h4>
+      <div id="behind_tasks"></div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 16px;">
+    <div class="col-sm-6">
+      <h4>Ready for Freight/Pickup (Dispatch)</h4>
+      <div id="ready_dispatches"></div>
+    </div>
+    <div class="col-sm-6">
+      <h4>Due Soon (Dispatch)</h4>
+      <div id="due_soon_dispatches"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .board-item {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #fff;
+  }
+  .board-meta {
+    opacity: 0.7;
+    font-size: 12px;
+  }
+</style>
+
+<script>
+  async function call(method, args) {
+    return await frappe.call({ method, args });
+  }
+
+  function renderTasks(items) {
+    if (!items || !items.length) return "<div class='board-meta'>None</div>";
+    return items
+      .map(
+        (t) => `
+        <div class="board-item">
+          <div><strong>${frappe.utils.escape_html(t.subject)}</strong></div>
+          <div class="board-meta">
+            ${frappe.utils.escape_html(t.probuild_team || "Unassigned")} · ${frappe.utils.escape_html(t.project || "No project")} · Due ${frappe.utils.escape_html(String(t.due_date))}
+          </div>
+        </div>
+      `
+      )
+      .join("");
+  }
+
+  function renderDispatches(items) {
+    if (!items || !items.length) return "<div class='board-meta'>None</div>";
+    return items
+      .map(
+        (d) => `
+        <div class="board-item">
+          <div><strong>${frappe.utils.escape_html(d.deliverable_type)}</strong></div>
+          <div class="board-meta">
+            ${frappe.utils.escape_html(d.status)} · ${frappe.utils.escape_html(d.project || "No project")} · Due ${frappe.utils.escape_html(String(d.due_date || ""))} · ${frappe.utils.escape_html(d.dispatch_method || "")}
+          </div>
+        </div>
+      `
+      )
+      .join("");
+  }
+
+  async function refresh() {
+    const res = await call("probuild.probuild.api.wallboard.get_board_data", {});
+    const data = res.message || {};
+
+    document.getElementById("due_today_tasks").innerHTML = renderTasks(data.due_today_tasks);
+    document.getElementById("behind_tasks").innerHTML = renderTasks(data.behind_tasks);
+    document.getElementById("ready_dispatches").innerHTML = renderDispatches(data.ready_dispatches);
+    document.getElementById("due_soon_dispatches").innerHTML = renderDispatches(data.due_soon_dispatches);
+    document.getElementById("updated").textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+  }
+
+  refresh();
+  setInterval(refresh, 30000);
+</script>
+
+

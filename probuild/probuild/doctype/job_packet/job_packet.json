@@ -1,0 +1,164 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "format:JP-{#####}",
+  "creation": "2025-12-28 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "job_section",
+    "job_type",
+    "sales_order",
+    "project",
+    "status",
+    "revision",
+    "tasks_generated",
+    "dispatch_generated",
+    "spec_section",
+    "fence_style",
+    "material",
+    "colour",
+    "gate_details",
+    "notes_section",
+    "notes",
+    "approval_section",
+    "approved_by",
+    "approved_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "job_section",
+      "fieldtype": "Section Break",
+      "label": "Job"
+    },
+    {
+      "fieldname": "job_type",
+      "fieldtype": "Select",
+      "label": "Job Type",
+      "options": "Supply Only\nSupply & Install",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sales_order",
+      "fieldtype": "Link",
+      "label": "Sales Order",
+      "options": "Sales Order"
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nApproved\nSuperseded",
+      "reqd": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "revision",
+      "fieldtype": "Int",
+      "label": "Revision",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "tasks_generated",
+      "fieldtype": "Check",
+      "label": "Tasks Generated",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "dispatch_generated",
+      "fieldtype": "Check",
+      "label": "Dispatch Deliverables Generated",
+      "read_only": 1
+    },
+    {
+      "fieldname": "spec_section",
+      "fieldtype": "Section Break",
+      "label": "Specification"
+    },
+    {
+      "fieldname": "fence_style",
+      "fieldtype": "Data",
+      "label": "Fence Style"
+    },
+    {
+      "fieldname": "material",
+      "fieldtype": "Data",
+      "label": "Material"
+    },
+    {
+      "fieldname": "colour",
+      "fieldtype": "Data",
+      "label": "Colour"
+    },
+    {
+      "fieldname": "gate_details",
+      "fieldtype": "Small Text",
+      "label": "Gate Details"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "approval_section",
+      "fieldtype": "Section Break",
+      "label": "Approval"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_on",
+      "fieldtype": "Datetime",
+      "label": "Approved On",
+      "read_only": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "links": [],
+  "module": "Probuild",
+  "name": "Job Packet",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
+
+

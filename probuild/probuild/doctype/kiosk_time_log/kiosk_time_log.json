@@ -1,0 +1,101 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "format:KTL-{#####}",
+  "creation": "2025-12-28 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "worker",
+    "task",
+    "project",
+    "status",
+    "started_at",
+    "stopped_at",
+    "duration_seconds",
+    "station",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "worker",
+      "fieldtype": "Link",
+      "label": "Worker",
+      "options": "Kiosk Worker",
+      "reqd": 1
+    },
+    {
+      "fieldname": "task",
+      "fieldtype": "Link",
+      "label": "Task",
+      "options": "Task",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project"
+    },
+    {
+      "default": "Running",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Running\nStopped",
+      "reqd": 1
+    },
+    {
+      "fieldname": "started_at",
+      "fieldtype": "Datetime",
+      "label": "Started At",
+      "reqd": 1
+    },
+    {
+      "fieldname": "stopped_at",
+      "fieldtype": "Datetime",
+      "label": "Stopped At"
+    },
+    {
+      "fieldname": "duration_seconds",
+      "fieldtype": "Int",
+      "label": "Duration (seconds)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "station",
+      "fieldtype": "Data",
+      "label": "Station"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "links": [],
+  "module": "Probuild",
+  "name": "Kiosk Time Log",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
+
+

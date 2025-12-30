@@ -1,0 +1,122 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "format:DD-{#####}",
+  "creation": "2025-12-28 00:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "link_section",
+    "job_type",
+    "sales_order",
+    "project",
+    "job_packet",
+    "deliverable_section",
+    "deliverable_type",
+    "dispatch_method",
+    "status",
+    "due_date",
+    "ready_date",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "link_section",
+      "fieldtype": "Section Break",
+      "label": "Links"
+    },
+    {
+      "fieldname": "job_type",
+      "fieldtype": "Select",
+      "label": "Job Type",
+      "options": "Supply Only\nSupply & Install"
+    },
+    {
+      "fieldname": "sales_order",
+      "fieldtype": "Link",
+      "label": "Sales Order",
+      "options": "Sales Order"
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project"
+    },
+    {
+      "fieldname": "job_packet",
+      "fieldtype": "Link",
+      "label": "Job Packet",
+      "options": "Job Packet"
+    },
+    {
+      "fieldname": "deliverable_section",
+      "fieldtype": "Section Break",
+      "label": "Deliverable"
+    },
+    {
+      "fieldname": "deliverable_type",
+      "fieldtype": "Select",
+      "label": "Deliverable Type",
+      "options": "PostsDispatch\nPanelsDispatch\nGateDispatch",
+      "reqd": 1
+    },
+    {
+      "fieldname": "dispatch_method",
+      "fieldtype": "Select",
+      "label": "Dispatch Method",
+      "options": "Freight\nPickup"
+    },
+    {
+      "default": "Planned",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Planned\nInProgress\nReady\nPickedUp\nDispatched\nCancelled",
+      "reqd": 1
+    },
+    {
+      "fieldname": "due_date",
+      "fieldtype": "Date",
+      "label": "Dispatch Due Date"
+    },
+    {
+      "fieldname": "ready_date",
+      "fieldtype": "Date",
+      "label": "Ready Date",
+      "read_only": 0
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "links": [],
+  "module": "Probuild",
+  "name": "Dispatch Deliverable",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
+
+

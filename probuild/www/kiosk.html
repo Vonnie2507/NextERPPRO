@@ -1,0 +1,99 @@
+<div class="container" style="max-width: 900px; padding-top: 24px;">
+  <h2>Workshop Kiosk</h2>
+
+  <div class="row" style="margin-top: 16px;">
+    <div class="col-sm-4">
+      <label>Worker</label>
+      <select id="worker" class="form-control"></select>
+    </div>
+    <div class="col-sm-4">
+      <label>PIN</label>
+      <input id="pin" type="password" class="form-control" inputmode="numeric" autocomplete="one-time-code" />
+    </div>
+    <div class="col-sm-4">
+      <label>Station (optional)</label>
+      <input id="station" type="text" class="form-control" placeholder="e.g. PanelsBench" />
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 16px;">
+    <div class="col-sm-12">
+      <label>Task</label>
+      <select id="task" class="form-control"></select>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 16px;">
+    <div class="col-sm-12">
+      <button id="refresh" class="btn btn-default">Refresh</button>
+      <button id="start" class="btn btn-primary">Start</button>
+      <button id="stop" class="btn btn-danger">Stop</button>
+      <span id="active" style="margin-left: 12px;"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function call(method, args) {
+    return await frappe.call({ method, args });
+  }
+
+  function option(value, label) {
+    const o = document.createElement("option");
+    o.value = value;
+    o.textContent = label;
+    return o;
+  }
+
+  async function loadWorkers() {
+    const res = await call("probuild.probuild.api.kiosk.list_workers", {});
+    const el = document.getElementById("worker");
+    el.innerHTML = "";
+    (res.message || []).forEach((w) => el.appendChild(option(w.name, w.worker_name)));
+  }
+
+  async function loadTasks() {
+    const res = await call("probuild.probuild.api.kiosk.list_open_tasks", { limit: 200 });
+    const el = document.getElementById("task");
+    el.innerHTML = "";
+    (res.message || []).forEach((t) => el.appendChild(option(t.name, `${t.subject} (${t.project || "no project"})`)));
+  }
+
+  async function refreshActive() {
+    const worker = document.getElementById("worker").value;
+    if (!worker) return;
+    const res = await call("probuild.probuild.api.kiosk.get_active_timer", { worker });
+    const active = res.message;
+    document.getElementById("active").textContent = active ? `Active: ${active.task} since ${active.started_at}` : "No active timer";
+  }
+
+  async function refreshAll() {
+    await loadWorkers();
+    await loadTasks();
+    await refreshActive();
+  }
+
+  async function start() {
+    const worker = document.getElementById("worker").value;
+    const pin = document.getElementById("pin").value;
+    const task = document.getElementById("task").value;
+    const station = document.getElementById("station").value;
+    await call("probuild.probuild.api.kiosk.start_timer", { worker, pin, task, station });
+    await refreshActive();
+  }
+
+  async function stop() {
+    const worker = document.getElementById("worker").value;
+    const pin = document.getElementById("pin").value;
+    await call("probuild.probuild.api.kiosk.stop_timer", { worker, pin });
+    await refreshActive();
+  }
+
+  document.getElementById("refresh").addEventListener("click", refreshAll);
+  document.getElementById("start").addEventListener("click", start);
+  document.getElementById("stop").addEventListener("click", stop);
+
+  refreshAll();
+</script>
+
+
