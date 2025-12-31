@@ -26,16 +26,21 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/probuild/css/probuild.css"
-# app_include_js = "/assets/probuild/js/probuild.js"
+app_include_js = "/assets/probuild/js/sms_notifications.js"
 
 # Include JS in specific doctype views
 doctype_js = {
-    "Opportunity": "public/js/opportunity_address.js",
+    "Opportunity": "public/js/opportunity_probuild.js",
     "Prospect": "public/js/prospect_probuild.js"
 }
 
-# Boot session - pass Google API key to frontend
+# Boot session - pass Google API key and SMS count to frontend
 boot_session = "probuild.probuild.boot.boot_session"
+
+# Whitelist Twilio webhook for guest access
+guest_methods = [
+    "probuild.probuild.api.twilio.receive_sms"
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/probuild/css/probuild.css"

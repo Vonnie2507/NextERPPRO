@@ -1,0 +1,14 @@
+{
+ "name": "Twilio Settings",
+ "doctype": "DocType",
+ "module": "Probuild",
+ "issingle": 1,
+ "fields": [
+  {"fieldname": "enabled", "fieldtype": "Check", "label": "Enable Twilio SMS", "default": 0},
+  {"fieldname": "account_sid", "fieldtype": "Data", "label": "Account SID", "reqd": 1},
+  {"fieldname": "auth_token", "fieldtype": "Password", "label": "Auth Token", "reqd": 1},
+  {"fieldname": "phone_number", "fieldtype": "Data", "label": "Twilio Phone Number", "reqd": 1, "description": "Your Twilio phone number (e.g., +61412345678)"},
+  {"fieldname": "default_country_code", "fieldtype": "Data", "label": "Default Country Code", "default": "+61"}
+ ],
+ "permissions": [{"role": "System Manager", "read": 1, "write": 1}]
+}

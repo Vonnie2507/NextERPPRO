@@ -1,0 +1,14 @@
+{
+ "name": "SMS Template",
+ "doctype": "DocType",
+ "module": "Probuild",
+ "autoname": "field:template_name",
+ "fields": [
+  {"fieldname": "template_name", "fieldtype": "Data", "label": "Template Name", "reqd": 1, "unique": 1},
+  {"fieldname": "message", "fieldtype": "Small Text", "label": "Message", "reqd": 1}
+ ],
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+  {"role": "Sales User", "read": 1}
+ ]
+}
